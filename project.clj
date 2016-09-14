@@ -1,4 +1,4 @@
-(defproject carafe  "0.1.0-SNAPSHOT"
+(defproject org.clojars.tomjkidd/carafe  "0.1.0-SNAPSHOT"
   :description "A library to carry functions to aid survival"
   :url "https://github.com/tomjkidd/carafe"
   :dependencies [[org.clojure/clojure "1.8.0"]

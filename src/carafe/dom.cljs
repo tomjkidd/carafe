@@ -22,6 +22,11 @@
   [tag]
   (.createElement js/document (name tag)))
 
+(defn- create-text-element
+  "Create a Text node"
+  [text]
+  (.createTextNode js/document text))
+
 (def svg-ns
   "The namespace for svg elements"
   "http://www.w3.org/2000/svg")
@@ -49,6 +54,7 @@
   [element a-name a-value]
   (cond
     (contains? #{:onmousedown :onmouseup :onmousemove
+                 :onclick
                  :onchange} a-name)
     (let [event-name (subs (name a-name) 2)]
       (.addEventListener element event-name a-value))
@@ -73,9 +79,12 @@
   attrs is a hashmap of attributes to apply to the element.
   children is a vector of elements, defined in the same way."
   [[tag attrs children]]
-  (let [e (create-empty-element tag)
-        cs (doall (map #(create-element %1) children))]
-    (process-attrs e attrs)
-    (when-not (nil? cs)
-      (doall (map #(append e %1) cs)))
-    e))
+  (if (and (= :text tag)
+           (string? children))
+    (create-text-element children)
+    (let [e (create-empty-element tag)
+          cs (doall (map #(create-element %1) children))]
+      (process-attrs e attrs)
+      (when-not (nil? cs)
+        (doall (map #(append e %1) cs)))
+      e)))

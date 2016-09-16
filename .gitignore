@@ -11,3 +11,4 @@ pom.xml
 .repl*
 
 /repl/
+/node_modules/

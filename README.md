@@ -17,6 +17,27 @@ You should just need to use cljsbuild
 lein cljsbuild once
 ```
 
+## Test
+
+[doo](https://github.com/bensu/doo) is used to provide tests through a
+lein plugin. I installed only what was necessary to get things up and
+running for *chrome* using *karma*. See [package.json](./package.json)
+for those dependencies.
+
+Once that is settled, run the following command to run the tests once
+
+```
+./scripts/run-cljs-tests
+```
+
+This is just a convenience to run 'lein doo chrome test-build once'
+
+To have the tests watch while you dev...
+
+```
+./scripts/run-cljs-tests-watch
+```
+
 ## License
 
 Copyright © 2016 Tom Kidd

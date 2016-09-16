@@ -1,10 +1,30 @@
 (ns carafe.dom
   (:require [goog.dom :as dom]))
 
+(defn by-selector
+  "Get all elements found by selector
+
+  Optionally provide a root element to limit search"
+  ([selector]
+   (by-selector selector js/document))
+  ([selector element]
+   (.querySelectorAll element selector)))
+
+(defn pluck
+  "Get a single element using a selector"
+  ([selector]
+   (pluck selector js/document))
+  ([selector element]
+   (.querySelector element selector)))
+
 (defn by-id
-  "Get an element by id"
-  [id]
-  (.getElementById js/document (name id)))
+  "Get an element by id
+
+  Optionally provide a root element to localize search"
+  ([id]
+   (by-id id js/document))
+  ([id element]
+   (.getElementById element (name id))))
 
 (defn remove-children
   "Remove all children from element"

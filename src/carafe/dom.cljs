@@ -51,6 +51,44 @@
   "The namespace for svg elements"
   "http://www.w3.org/2000/svg")
 
+(def svg-elements
+  "Valid SVG elements"
+  #{:svg
+    :g
+    :circle
+    :ellipse
+    :line
+    :polygon
+    :polyline
+    :rect
+
+    :animate
+    :animateColor
+    :animateMotion
+    :animateTransform
+
+    :defs
+    :symbol
+    :use})
+
+(def events
+  "Valid events"
+  #{:onkeydown :onkeypress :onkeyup
+
+    :onmouseenter :onmouseleave :onmouseover :onmouseout
+    :onmousedown :onmouseup :onmousemove
+    :onclick :ondblclick :oncontextmenu
+    :onwheel
+    :onchange
+
+    :ondragstart :ondrag :ondragend :ondragenter :ondragover :ondragleave :ondrop
+
+    :onfocus :onblur
+
+    :onresize :onscroll
+
+    :oncut :oncopy :onpaste})
+
 (defn- init-element-ns
   "Create an empty namespaced element"
   [ns tag]
@@ -66,16 +104,14 @@
   [tag]
   (let [stag (sanitize-tag tag)]
     (cond
-      (contains? #{:svg :circle} stag) (init-element-ns svg-ns stag)
+      (contains? svg-elements stag) (init-element-ns svg-ns stag)
       :else (init-element stag))))
 
 (defn process-attr
   "For element, set attribute named a-name to the value a-value"
   [element a-name a-value]
   (cond
-    (contains? #{:onmousedown :onmouseup :onmousemove
-                 :onclick
-                 :onchange} a-name)
+    (contains? events a-name)
     (let [event-name (subs (name a-name) 2)]
       (.addEventListener element event-name a-value))
     :else (.setAttribute element (name a-name) (str a-value))))

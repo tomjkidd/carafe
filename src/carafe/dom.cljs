@@ -55,6 +55,7 @@
   "Valid SVG elements"
   #{:svg
     :g
+    :path
     :circle
     :ellipse
     :line

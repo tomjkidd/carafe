@@ -108,6 +108,16 @@
       (contains? svg-elements stag) (init-element-ns svg-ns stag)
       :else (init-element stag))))
 
+(defn get-attr
+  "Use keyword to access an attribute"
+  [element attr-keyword]
+  (.getAttribute element (name attr-keyword)))
+
+(defn set-attr
+  "Set attribute for an element using a keyword"
+  [element attr-keyword attr-value]
+  (.setAttribute element (name attr-keyword) attr-value))
+
 (defn process-attr
   "For element, set attribute named a-name to the value a-value"
   [element a-name a-value]

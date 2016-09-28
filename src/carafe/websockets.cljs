@@ -3,14 +3,14 @@
 (defn create-websocket
   "Create a websocket and provide all of it's callbacks
 
-  :onopen Event
-  :onerror Event
-  :onclose CloseEvent
-  :onmessage MessageEvent"
+  :onopen :: ws -> Event -> ()
+  :onerror :: ws -> Event -> ()
+  :onclose :: ws -> CloseEvent -> ()
+  :onmessage :: ws -> MessageEvent -> ()"
   [url {:keys [onopen onerror onclose onmessage]}]
   (let [ws (js/WebSocket. url)]
-    (set! (.-onopen ws) onopen)
-    (set! (.-onerror ws) onerror)
-    (set! (.-onclose ws) onclose)
-    (set! (.-onmessage ws) onmessage)
+    (set! (.-onopen ws) (partial onopen ws))
+    (set! (.-onerror ws) (partial onerror ws))
+    (set! (.-onclose ws) (partial onclose ws))
+    (set! (.-onmessage ws) (partial onmessage ws))
     ws))

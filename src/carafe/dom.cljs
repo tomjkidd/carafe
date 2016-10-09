@@ -82,6 +82,9 @@
     :onwheel
     :onchange
 
+    :onpointerenter :onpointerleave :onpointerover :onpointerout
+    :onpointerdown :onpointerup :onpointermove
+
     :ondragstart :ondrag :ondragend :ondragenter :ondragover :ondragleave :ondrop
 
     :onfocus :onblur

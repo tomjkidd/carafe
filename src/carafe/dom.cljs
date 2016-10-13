@@ -26,6 +26,11 @@
   ([id element]
    (.getElementById element (name id))))
 
+(defn remove
+  "Remove the current element"
+  [element]
+  (.removeChild (.-parentNode element) element))
+
 (defn remove-children
   "Remove all children from element"
   [element]
